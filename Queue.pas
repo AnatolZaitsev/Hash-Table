@@ -44,10 +44,10 @@ procedure TList.DeleteList(var p: PNode; k: TInf);
 var
   r: PNode;
 begin
-  if p = nil then                                  //если список пуст
+  if p = nil then                 //РµСЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚, РІС‹С…РѕРґРёРј
     Exit;
 
-  if (p.inf2 = k) and (p^.Next <> nil) then      // если первый элемент искомый, дальше список есть
+  if (p.inf2 = k) and (p^.Next <> nil) then      // РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёСЃРєРѕРјС‹Р№, РґР°Р»РµРµ СЃРїРёСЃРѕРє
   begin
     r:= p;
     r^.Pred^.Next:= nil;
@@ -56,26 +56,26 @@ begin
     Exit;
   end;
 
-  if (p.Pred = nil) and (p.inf2 = k) then       //если первый элемент искомый,дальше список есть
+  if (p.Pred = nil) and (p.inf2 = k) then       // РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РёСЃРєРѕРјС‹Р№, РґР°Р»РµРµ СЃРїРёСЃРѕРє
   begin
    p:= nil;
    Exit;
   end;
 
-  if p.inf2 <> k then                             //если первый элемент не искомый
+  if p.inf2 <> k then            // РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РЅРµ РёСЃРєРѕРјС‹Р№
   begin
     r:= p;
     while r.inf2 <> k do
       r:= r^.Next;
 
-    if r.Next = nil then                              //если элемент последний
+    if r.Next = nil then      // РёСЃРєРѕРјС‹Р№ СЌР»РµРјРµРЅС‚ - РїРѕСЃР»РµРґРЅРёР№                
     begin
       r^.Pred^.Next:= nil;
       Dispose(r);
     end
     
     else
-    begin                                          //если элемент не последний
+    begin                              // РµСЃР»Рё СЌР»РµРјРµРЅС‚ РЅРµ РїРѕСЃР»РµРґРЅРёР№
       r^.Pred^.Next:= r^.Next;
       r^.Next^.Pred:= r^.Pred;
       Dispose(r);
@@ -87,7 +87,7 @@ end;
 
 function Tlist.FindList(var q: PNode; k:Tinf):TInf;
 var
-	p:Pnode;
+  p:Pnode;
   ok:boolean;
 begin
   ok:= False;
@@ -95,27 +95,27 @@ begin
   while not ok and (p <> nil) do
     if p^.inf2 = k then
     begin
-    	Result:= p.inf;
+      Result:= p.inf;
       ok:= True;
     end
     else
       p:= p^.Next;
-  if not ok then
-    p:= nil;
+    if not ok then
+      p:= nil;
 end;
 
 procedure TList.InsertList(var p: PNode; k,l: TInf);
 var
   t,r:PNode;
-	i:integer;
+  i:integer;
 begin
   if p = Nil then
   begin
     New(t);
     with t^ do
     begin
-      Inf:= l;   // значение
-      inf2:= k;  // ключ
+      Inf:= l;   // Р·РЅР°С‡РµРЅРёРµ
+      inf2:= k;  // РєР»СЋС‡
       Next:= nil;
       pred:= nil;
       p:= t;
@@ -130,22 +130,22 @@ begin
        r.Inf:= l;
        Exit;
      end
-  else
-  	r:= r^.Next;
+     else
+       r:= r^.Next;
   until r = nil;
-  	r:= p;
-    while r.Next <> nil do
-       r:=r^.Next;
-    new(t);
-    with t^ do
-    begin
-      Inf:= l;   // значение
-      inf2:= k;  // ключ
-      Next:= nil;
-      Pred:= r;
-      r.Next:= t;
-      r:= t;
-    end;
+  r:= p;
+  while r.Next <> nil do
+   r:=r^.Next;
+  New(t);
+  with t^ do
+  begin
+    Inf:= l;   // Р·РЅР°С‡РµРЅРёРµ
+    inf2:= k;  // РєР»СЋС‡
+    Next:= nil;
+    Pred:= r;
+    r.Next:= t;
+    r:= t;
+  end;
   end
 end;
 
