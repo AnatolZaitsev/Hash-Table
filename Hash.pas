@@ -6,14 +6,14 @@ uses
 	Queue, SysUtils;
 
 type
-   THashItem = record         // индексами массива будут записи
+   THashItem = record         // РёРЅРґРµРєСЃР°РјРё РјР°СЃСЃРёРІР° Р±СѓРґСѓС‚ Р·Р°РїРёСЃРё
      Info: TList;
-     Empty: Boolean;         // пуст ли элемент
+     Empty: Boolean;         // РїСѓСЃС‚РѕР№ СЌР»РµРјРµРЅС‚ РёР»Рё РЅРµС‚
    end;
 
    THashTable = record
-     Size: Integer;           // число элементов в таблице(ее размер)
-     H: array of THashItem;  // хэш-таблица
+     Size: Integer;           // С‡РёСЃР»Рѕ СЌР»РµРјРµРЅС‚РѕРІ РІ С‚Р°Р±Р»РёС†Рµ
+     H: array of THashItem;  // С…СЌС€-С‚Р°Р±Р»РёС†Р°
    end;
 
 
@@ -28,7 +28,7 @@ var
 
 implementation
 
-function HashFunc(s:string):integer; // Хэш функция
+function HashFunc(s:string):integer; // РҐСЌС€-С„СѓРЅРєС†РёСЏ
 var
 	i:integer;
 begin
@@ -38,7 +38,7 @@ begin
   Result:= (Result mod SizeTable);
 end;
 
-function Add(var HT:THashTable; inf,inf2:TInf):integer;   // Добавление элемента в таблицу
+function Add(var HT:THashTable; inf,inf2:TInf):integer;   // Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ С‚Р°Р±Р»РёС†Сѓ
 var
 	i:integer;
   r:PNode;
@@ -46,7 +46,7 @@ var
 begin
   if HT.Size = SizeTable*3 then
   begin
-    Result:= -3;   //таблица переполнена
+    Result:= -3;   // С‚Р°Р±Р»РёС†Р° РїРµСЂРµРїРѕР»РЅРµРЅР°
     Exit;
   end
   else
@@ -59,20 +59,18 @@ begin
         Empty:= False;
         Info.InsertList(info.BegList,inf,inf2);
       end;
-      HT.Size:= HT.Size+1; // Кол-во элементов в таблице увеличилось
+      HT.Size:= HT.Size+1; // РљРѕР»-РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ С‚Р°Р±Р»РёС†Рµ СѓРІРµР»РёС‡РёР»РѕСЃСЊ
       Result:= i;
     end
     else
-    begin    //разрешение колллизии
+    begin    // СЂР°Р·СЂРµС€РµРЅРёРµ РєРѕР»Р»РёР·РёРё
       HT.H[i].info.InsertList(HT.H[i].info.BegList,inf,inf2);
       Result:= i;
     end;
   end;
 end;
 
-function Find(var HT:THashTable; Inf,res:Tinf ):Tinf;    // Поиск элемента с заданным ключом
-//-1 если не найдено, или при добавлении таблица была переполнена
-//если элемент найден, то значение функции равно индексу элемента
+function Find(var HT:THashTable; Inf,res:Tinf ):Tinf;    // РџРѕРёСЃРє СЌР»РµРјРµРЅС‚Р° СЃ Р·Р°РґР°РЅРЅС‹Рј РєР»СЋС‡РѕРј
 var
 	i:integer;
   p:PNode;
@@ -81,11 +79,11 @@ begin
 	if not (HT.H[i].Empty) then
     Result:= HT.H[i].info.FindList(HT.H[i].info.BegList,inf)
   else
-  	Result:= 'не найдено';
+  	Result:= 'РќРµ РЅР°Р№РґРµРЅРѕ';
 end;
 
 
-procedure Delete(var HT:THashTable; k:Tinf);   // Удаление элемента
+procedure Delete(var HT:THashTable; k:Tinf);   // РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РїРѕ РєР»СЋС‡Сѓ
 var
 	i:integer;
   res:boolean;
