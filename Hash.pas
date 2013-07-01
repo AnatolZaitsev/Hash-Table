@@ -41,8 +41,6 @@ end;
 function Add(var HT:THashTable; inf,inf2:TInf):integer;   // Добавление элемента в таблицу
 var
   i:integer;
-  r:PNode;
-  s:string;
 begin
   if HT.Size = SizeTable*3 then
   begin
@@ -73,7 +71,6 @@ end;
 function Find(var HT:THashTable; Inf,res:Tinf ):Tinf;    // Поиск элемента с заданным ключом
 var
   i:integer;
-  p:PNode;
 begin
   i:= HashFunc(Inf);
   if not (HT.H[i].Empty) then
@@ -86,7 +83,6 @@ end;
 procedure Delete(var HT:THashTable; k:Tinf);   // Удаление элемента по ключу
 var
   i:integer;
-  res:boolean;
 begin
   i:= HashFunc(k);
   if not (HT.H[i].Empty) then
