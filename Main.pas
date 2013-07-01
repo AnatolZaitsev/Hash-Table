@@ -37,9 +37,9 @@ var
 
 implementation
 
-procedure TFormHashMain.ClearTable;  //  Очистка всей таблицы StringGrid1
+procedure TFormHashMain.ClearTable;  // РћС‡РёСЃС‚РєР° РІСЃРµР№ С‚Р°Р±Р»РёС†С‹ StringGrid1
 var
-	i:integer;
+  i:integer;
 begin
   with StringGrid1 do
     for i:=0 to ColCount-1 do
@@ -79,44 +79,44 @@ end;
 
 procedure TFormHashMain.ButtonAddClick(Sender: TObject);
 var
-	k:integer;
+  k:integer;
 begin
-	k:= Add(HT,EditKey.text,EditItem.text);
+  k:= Add(HT,EditKey.text,EditItem.text);
   if k=-3 then
-    ShowMessage('Таблица переполнена');
+    ShowMessage('РўР°Р±Р»РёС†Р° РїРµСЂРµРїРѕР»РЅРµРЅР°');
   ClearTable;
   SetGrid(HT);
 end;
 
 procedure TFormHashMain.FormCreate(Sender: TObject);
 var
-	i:integer;
+  i:integer;
 begin
-	Form2:=TForm2.Create(self);
+  Form2:=TForm2.Create(self);
   Form2.ShowModal;
-	SetLength(HT.H,SizeTable);
-	For i:= 0 to SizeTable-1 do
+  SetLength(HT.H,SizeTable);
+  For i:= 0 to SizeTable-1 do
   begin
-  	HT.H[i].empty:= True;
+    HT.H[i].empty:= True;
     HT.H[i].info:= TList.Create;
   end;
 end;
 
 procedure TFormHashMain.ButtonFindClick(Sender: TObject);
 var
-	k:integer;
+  k:integer;
   s,s1:string;
 begin
-	s:=EditKey.Text;
-	s1:=Find(HT,s,s1);
+  s:=EditKey.Text;
+  s1:=Find(HT,s,s1);
   if k=-1 then
-    Showmessage('Элемента с данным ключом не существует');
+    Showmessage('Р­Р»РµРјРµРЅС‚Р° СЃ С‚Р°РєРёРј РєР»СЋС‡РѕРј РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚');
   Showmessage(s1);
 end;
 
 procedure TFormHashMain.ButtonDeleteClick(Sender: TObject);
 begin
-	Delete(HT,EditKey.text);
+  Delete(HT,EditKey.text);
   ClearTable;
   SetGrid(HT);
 end;
@@ -126,7 +126,7 @@ begin
   if EditSize.text <> '' then
     SizeTable:= StrToInt(EditSize.text)
   else
-    Showmessage('Неверное значение кол-ва ячеек');
+    Showmessage('РќРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєРѕР»-РІР° СЏС‡РµРµРє');
   StringGrid1.RowCount:= SizeTable;
   StringGrid1.ColCount:= SizeTable;
 end;
