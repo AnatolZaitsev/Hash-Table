@@ -28,16 +28,16 @@ implementation
 
 procedure TForm2.Button1Click(Sender: TObject);
 begin
-	SizeTable:=StrToInt(Edit1.text);
+  SizeTable:=StrToInt(Edit1.text);
   Form2.Close;
 end;
 
 procedure TForm2.Edit1KeyPress(Sender: TObject; var Key: Char);
 begin
-	if not (key in['0'..'9', #8]) then
- begin
- key:=#0;
- end;
+  if not (key in['0'..'9', #8]) then
+  begin
+    key:=#0;
+  end;
 end;
 
 end.
