@@ -3,7 +3,7 @@ unit Hash;
 interface
 
 uses
-	Queue, SysUtils;
+  Queue, SysUtils;
 
 type
    THashItem = record         // индексами массива будут записи
@@ -23,24 +23,24 @@ function Find(var HT:THashTable; Inf,res:Tinf ):Tinf;
 procedure Delete(var HT:THashTable; k:Tinf);
 
 var
-	HT : THashTable;
+  HT : THashTable;
   SizeTable : integer;
 
 implementation
 
 function HashFunc(s:string):integer; // Хэш-функция
 var
-	i:integer;
+  i:integer;
 begin
-	Result:= 0;
+  Result:= 0;
   for i:=1 to Length(s) do
-  	Result:= Result+ord(s[i]);
+    Result:= Result+ord(s[i]);
   Result:= (Result mod SizeTable);
 end;
 
 function Add(var HT:THashTable; inf,inf2:TInf):integer;   // Добавление элемента в таблицу
 var
-	i:integer;
+  i:integer;
   r:PNode;
   s:string;
 begin
@@ -72,23 +72,23 @@ end;
 
 function Find(var HT:THashTable; Inf,res:Tinf ):Tinf;    // Поиск элемента с заданным ключом
 var
-	i:integer;
+  i:integer;
   p:PNode;
 begin
   i:= HashFunc(Inf);
-	if not (HT.H[i].Empty) then
+  if not (HT.H[i].Empty) then
     Result:= HT.H[i].info.FindList(HT.H[i].info.BegList,inf)
   else
-  	Result:= 'Не найдено';
+    Result:= 'Не найдено';
 end;
 
 
 procedure Delete(var HT:THashTable; k:Tinf);   // Удаление элемента по ключу
 var
-	i:integer;
+  i:integer;
   res:boolean;
 begin
-	i:= HashFunc(k);
+  i:= HashFunc(k);
   if not (HT.H[i].Empty) then
     HT.H[i].info.DeleteList(HT.H[i].info.BegList,k)
 end;
