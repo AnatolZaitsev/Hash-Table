@@ -107,7 +107,6 @@ end;
 procedure TList.InsertList(var p: PNode; k,l: TInf);
 var
   t,r:PNode;
-  i:integer;
 begin
   if p = Nil then
   begin
